@@ -105,10 +105,10 @@ function formatMonto(n) {
 function renderCard(d, q) {
   const nivel = nivelRiesgo(d);
   const badgeNivel = nivel === "alto"
-    ? `<span class="badge badge-rojo">⚠ ALTO RIESGO</span>`
+    ? `<span class="badge badge-rojo">🚫 ALTO RIESGO</span>`
     : nivel === "medio"
     ? `<span class="badge badge-naranja">⚡ RIESGO MEDIO</span>`
-    : `<span class="badge badge-verde">✓ SIN ALERTA</span>`;
+    : `<span class="badge badge-verde">✅ SIN ALERTA</span>`;
 
   const badgeReclamos = d.reclamos > 1
     ? `<span class="badge badge-naranja">${d.reclamos} reclamos</span>`
