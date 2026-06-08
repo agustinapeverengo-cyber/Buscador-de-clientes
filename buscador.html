@@ -52,11 +52,10 @@
   .reclamos-tabla td.mono { font-family: "DM Mono", monospace; font-size: 11px; }
   .reclamos-tabla td.monto { color: #FFCC80; font-family: "DM Mono", monospace; }
   .reclamos-tabla td.comentario { font-size: 11px; color: var(--subtxt); font-style: italic; max-width: 300px; }
-  .mensaje { border-radius: 8px; padding: 12px 16px; font-size: 13px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+  .mensaje { border-radius: 8px; padding: 12px 16px; font-size: 13px; font-weight: 500; line-height: 1.5; }
   .mensaje.bajo   { background: rgba(67,160,71,.1);  color: #A5D6A7; border: 1px solid rgba(67,160,71,.25); }
   .mensaje.medio  { background: rgba(251,140,0,.1);  color: #FFCC80; border: 1px solid rgba(251,140,0,.25); }
   .mensaje.alto   { background: rgba(229,57,53,.1);  color: #EF9A9A; border: 1px solid rgba(229,57,53,.25); }
-  .nota { font-size: 12px; color: var(--subtxt); font-style: italic; padding: 0 4px; margin-bottom: 10px; }
   .vinculo-banner { margin-top: 10px; background: rgba(229,57,53,.08); border: 1px solid rgba(229,57,53,.2); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #EF9A9A; line-height: 1.6; margin-bottom: 10px; }
   .vinculo-banner strong { display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
   #empty { text-align: center; padding: 60px 0; color: var(--subtxt); font-size: 14px; display: none; }
@@ -108,9 +107,9 @@ function formatMonto(n) {
 }
 
 const MENSAJES = {
-  bajo:  { principal: "✅ Este cliente no registra antecedentes de fraude. Podés avanzar con normalidad.", nota: null },
-  medio: { principal: "⚠️ Este cliente tiene reclamos reiterados. Procedé con precaución y verificá los datos antes de aprobar.", nota: "* Recordá chequear si es reincidente en los reclamos o si los resarcimientos anteriores no fueron aplicados correctamente." },
-  alto:  { principal: "🚫 Este cliente presenta indicios de fraude. No aprobar resarcimientos sin autorización de un supervisor.", nota: "* Recordá chequear si es reincidente en los reclamos o si los resarcimientos anteriores no fueron aplicados correctamente." }
+  bajo:  "✅ Este cliente no registra antecedentes de fraude. Podés avanzar con normalidad.",
+  medio: "⚠️ Este cliente tiene reclamos reiterados. Procedé con precaución y verificá los datos antes de aprobar.",
+  alto:  "🚫 Este cliente presenta indicios de fraude. No aprobar resarcimientos sin autorización de un supervisor."
 };
 
 function renderCard(d, q) {
@@ -152,9 +151,6 @@ function renderCard(d, q) {
       ${hl(d.vinculadas, q)}
     </div>` : "";
 
-  const msg = MENSAJES[nivel];
-  const notaHtml = msg.nota ? `<div class="nota">${msg.nota}</div>` : "";
-
   return `
   <div class="card ${nivel}">
     <div class="card-header">
@@ -168,8 +164,7 @@ function renderCard(d, q) {
     </div>
     ${tablaReclamos}
     ${vinculoBanner}
-    <div class="mensaje ${nivel}">${msg.principal}</div>
-    ${notaHtml}
+    <div class="mensaje ${nivel}">${MENSAJES[nivel]}</div>
   </div>`;
 }
 
